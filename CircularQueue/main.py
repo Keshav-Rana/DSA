@@ -17,7 +17,7 @@ class CircularQueue:
     def enqueue(self, value):
         # check if the ll is empty
         if self.space <= 0:
-            return False
+            raise Exception('Cannot enqueue. Queue is full.')
         
         newNode = Node(value)
         newNode.next = self.right
@@ -28,29 +28,25 @@ class CircularQueue:
 
         self.space -= 1
 
-        return True
-
     def dequeue(self):
         if self.isEmpty():
-            return False
+            raise Exception('Cannot dequeue from empty queue.')
         
         self.left.next = self.left.next.next
         self.left.next.prev = self.left
 
         self.space += 1
-
-        return True
     
     def peekFront(self):
         # first check the queue is not empty
         if self.isEmpty():
-            return -1
+            raise Exception('Queue is empty. No front exists.')
         
         return self.left.next.val
 
     def peekRear(self):
         if self.isEmpty():
-            return -1
+            raise Exception('Queue is empty. No rear exists.')
         
         return self.right.prev.val
 
@@ -62,9 +58,12 @@ class CircularQueue:
             # start from head and print all elements
             head = self.left.next
             # don't print the last node
-            while head.next:
+            while head != self.right:
                 print(head.data, end = ' ')
                 head = head.next
+
+        else:
+            raise Exception('Cannot print queue. Queue is empty.')
 
 if __name__ == '__main__':
     pass
@@ -80,7 +79,5 @@ if __name__ == '__main__':
     print('\n')
 
     q.dequeue()
-    q.dequeue()
-    q.dequeue()
-    q.dequeue()
+    q.enqueue(5)
     q.printQueue()
