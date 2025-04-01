@@ -65,8 +65,8 @@ class Graph:
 if __name__ == '__main__':
     pass
     # test out graph and it's methods here
-    edges = [(1, 2), (1, 3), (2, 3)]
-    g = Graph(5, 5, edges)
+    edges = [(1, 2), (1, 5), (2, 4), (2, 3), (5, 6)]
+    g = Graph(7, 7, edges)
 
     g.createAdjListGraph()
     g.createAdjMatrixGraph()
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     g.BFSOnList(1)
     print('\n')
 
-    visited = [False] * 5
+    visited = [False] * 7
     result = []
     g.DFSOnList(1, visited, result)
     print(result)
